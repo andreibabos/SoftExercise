@@ -8,3 +8,6 @@ let persoana = {
 let json = JSON.stringify(persoana);
 
 console.log(json);
+
+let parse = JSON.parse(json);
+console.log(parse.name);
