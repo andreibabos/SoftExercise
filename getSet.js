@@ -16,3 +16,4 @@ console.log(user.fullName);
 user.fullName = "Andrei Babos";
 
 console.log(user.fullName);
+console.log(user);
