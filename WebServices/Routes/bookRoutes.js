@@ -4,27 +4,11 @@ let routes = function (Book) {
 
     let bookRouter = express.Router();
 
-    bookRouter.route("/")
-        .post(function (req, res) {
-            let book = new Book(req.body);
+    let bookController = require("../Controllers/bookController")(Book);
 
-            //console.log(book);
-            book.save();
-            res.status(201).send(book);
-        })
-        .get(function (req, res) {
-            let query = {};
-            if (req.query.genre) {
-                query.genre = req.query.genre;
-                console.log(query.genre + " " + req.query.genre);
-            }
-            Book.find(query, function (err, books) {
-                if (err)
-                    res.status(500).send(err);
-                else
-                    res.json(books);
-            });
-        });
+    bookRouter.route("/")
+        .post(bookController.post)
+        .get(bookController.get);
 
     bookRouter.use("/:bookId", function (req, res, next) {
         Book.findById(req.params.bookId, function (err, books) {//books e referinta la colectia de la .model("name",schema,collecti
